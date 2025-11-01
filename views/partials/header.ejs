@@ -1,0 +1,70 @@
+<header class="site-header">
+  <div class="container">
+    <div class="header-content">
+      <a href="/" class="brand">
+        <span class="brand-mark">DL</span>
+        <span class="brand-copy">
+          <strong data-i18n-key="brand.title">Deutsch Leseecke</strong>
+          <small data-i18n-key="brand.tagline">Deine Bibliothek f&uuml;r Kurzgeschichten</small>
+        </span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="/" class="nav-link" data-i18n-key="nav.library">Bibliothek</a>
+        <div class="nav-dropdown">
+          <button
+            type="button"
+            class="nav-link nav-link--dropdown"
+            data-i18n-key="nav.learning"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Lernen
+          </button>
+          <div class="nav-dropdown__menu">
+            <a href="/learning/vocabulary" class="nav-dropdown__link" data-i18n-key="nav.vocabulary">Vokabeln</a>
+            <a href="/learning/grammar" class="nav-dropdown__link" data-i18n-key="nav.grammar">Grammatik</a>
+          </div>
+        </div>
+        <a href="/about" class="nav-link" data-i18n-key="nav.about">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="nav-language">
+          <select
+            id="site-language"
+            class="language-select nav-language-select"
+            data-language-select
+            data-i18n-attr="aria-label:nav.languageLabel"
+            aria-label="Website language"
+          >
+            <option value="de">Deutsch</option>
+            <option value="en">English</option>
+            <option value="es">Espa&ntilde;ol</option>
+            <option value="ru">Russian</option>
+            <option value="hy">Armenian</option>
+          </select>
+        </div>
+
+        <% if (isAdmin) { %>
+          <div class="nav-admin-actions">
+            <a href="/stories/new" class="button button-secondary nav-action" data-i18n-key="nav.newStory">Neue Geschichte</a>
+            <a href="/questions/new" class="button button-ghost nav-action" data-i18n-key="nav.newQuestion">Neue Frage</a>
+          </div>
+        <% } %>
+
+        <% if (currentUser) { %>
+          <div class="nav-user">
+            <span class="nav-user-email"><%= currentUser.email %></span>
+            <form method="post" action="/logout" class="logout-form">
+              <button type="submit" class="nav-button" data-i18n-key="nav.logout">Logout</button>
+            </form>
+          </div>
+        <% } else { %>
+          <a href="/login" class="nav-link" data-i18n-key="nav.login">Login</a>
+          <a href="/signup" class="button button-primary nav-action" data-i18n-key="nav.signup">Sign up</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</header>

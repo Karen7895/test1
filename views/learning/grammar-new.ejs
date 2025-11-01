@@ -1,0 +1,64 @@
+<%- include('../partials/head', { pageTitle: 'Neues Grammatikthema' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <span class="eyebrow">Redaktion</span>
+      <h1 data-i18n-key="learning.grammar.formTitle">Neues Grammatikthema verfassen</h1>
+      <p data-i18n-key="learning.grammar.formIntro">
+        Beschreibe eine Struktur, typische Fehler und Beispiele, damit Lernende schneller Fortschritte machen.
+      </p>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="container container-narrow">
+      <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+      <% if (success) { %>
+        <div class="alert alert-success"><%= success %></div>
+      <% } %>
+
+      <form method="post" action="/learning/grammar" class="form-card">
+        <div class="form-field">
+          <label class="form-label" for="title" data-i18n-key="learning.grammar.titleLabel">Thema</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="form-input"
+            value="<%= values.title %>"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="explanation" data-i18n-key="learning.grammar.explanationLabel">Erkl&auml;rung</label>
+          <textarea
+            id="explanation"
+            name="explanation"
+            class="form-textarea"
+            rows="10"
+            required
+          ><%= values.explanation %></textarea>
+          <p class="help-text" data-i18n-key="learning.grammar.explanationHelp">
+            Tipp: Du kannst HTML-Formatierung wie &lt;strong&gt; und &lt;ul&gt; verwenden, um Beispiele hervorzuheben.
+          </p>
+        </div>
+
+        <div class="form-actions">
+          <a href="/learning/grammar" class="button button-ghost" data-i18n-key="learning.grammar.cancel">
+            Abbrechen
+          </a>
+          <button type="submit" class="button button-primary" data-i18n-key="learning.grammar.save">
+            Speichern
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

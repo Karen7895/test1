@@ -1,0 +1,75 @@
+<%- include('../partials/head', { pageTitle: 'Neuer Wortschatz' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <span class="eyebrow">Redaktion</span>
+      <h1 data-i18n-key="learning.vocabulary.formTitle">Neuen Vokabeleintrag anlegen</h1>
+      <p data-i18n-key="learning.vocabulary.formIntro">
+        Teile wichtige W&ouml;rter mit der Community, inklusive &Uuml;bersetzung und optionalem Beispielsatz.
+      </p>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="container container-narrow">
+      <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+      <% if (success) { %>
+        <div class="alert alert-success"><%= success %></div>
+      <% } %>
+
+      <form method="post" action="/learning/vocabulary" class="form-card">
+        <div class="form-field">
+          <label class="form-label" for="term" data-i18n-key="learning.vocabulary.termLabel">Deutsch</label>
+          <input
+            type="text"
+            id="term"
+            name="term"
+            class="form-input"
+            value="<%= values.term %>"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="translation" data-i18n-key="learning.vocabulary.translationLabel">&Uuml;bersetzung</label>
+          <input
+            type="text"
+            id="translation"
+            name="translation"
+            class="form-input"
+            value="<%= values.translation %>"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="exampleSentence" data-i18n-key="learning.vocabulary.exampleLabelFull">Beispielsatz</label>
+          <textarea
+            id="exampleSentence"
+            name="exampleSentence"
+            class="form-textarea"
+            rows="4"
+          ><%= values.exampleSentence %></textarea>
+          <p class="help-text" data-i18n-key="learning.vocabulary.exampleHelp">
+            Optional: Ein Satz, der das Wort im Kontext zeigt.
+          </p>
+        </div>
+
+        <div class="form-actions">
+          <a href="/learning/vocabulary" class="button button-ghost" data-i18n-key="learning.vocabulary.cancel">
+            Abbrechen
+          </a>
+          <button type="submit" class="button button-primary" data-i18n-key="learning.vocabulary.save">
+            Speichern
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

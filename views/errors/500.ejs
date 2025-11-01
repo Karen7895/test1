@@ -1,0 +1,18 @@
+<%- include('../partials/head', { pageTitle: 'Fehler' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="error-state">
+    <div class="container container-narrow">
+      <span class="error-code">500</span>
+      <h1>Unerwarteter Fehler.</h1>
+      <p>Etwas ist schiefgelaufen. Bitte lade die Seite neu oder versuche es sp&auml;ter erneut. Wenn das Problem bestehen bleibt, kontaktiere das Team.</p>
+      <div class="error-actions">
+        <a href="/" class="button button-primary">Neu laden</a>
+        <a href="mailto:support@example.com" class="button button-ghost">Support kontaktieren</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

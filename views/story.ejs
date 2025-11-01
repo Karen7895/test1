@@ -1,0 +1,142 @@
+<%- include('partials/head', { pageTitle: story.title }) %>
+<%- include('partials/header') %>
+
+<main class="main-content">
+  <section class="story-hero">
+    <div class="container container-narrow">
+      <a href="/" class="back-link">
+        <span aria-hidden="true">&#8592;</span>
+        <span data-i18n-key="story.backLink">Zur&uuml;ck zur Bibliothek</span>
+      </a>
+      <header class="story-meta">
+        <span class="level-badge level-<%= story.level.toLowerCase() %>"><%= story.level %></span>
+        <% if (story.created_at) { %>
+          <time datetime="<%= story.created_at %>" class="story-published">
+            <span data-i18n-key="story.publishedLabel">Ver&ouml;ffentlicht am</span>
+            <span class="story-published-date"><%= story.created_at %></span>
+          </time>
+        <% } %>
+      </header>
+      <h1 class="story-title"><%= story.title %></h1>
+      <p class="story-summary"><%= story.summary %></p>
+    </div>
+  </section>
+
+  <article class="story-detail" data-story-language="<%= story.language || 'auto' %>">
+    <div class="container container-narrow">
+      <div class="story-translation">
+        <p class="translation-hint" id="translation-hint" data-i18n-key="story.translationHint">
+          Klicke auf ein Wort oder markiere mehrere W&ouml;rter, um &Uuml;bersetzungen in {{LANGUAGE}} zu sehen.
+        </p>
+      </div>
+
+      <div class="story-body">
+        <% story.body.split('\n\n').forEach((paragraph) => { %>
+          <% if (paragraph.trim().length) { %>
+            <p><%= paragraph %></p>
+          <% } %>
+        <% }) %>
+      </div>
+
+      <% if (Array.isArray(questions) && questions.length) { %>
+        <section class="story-quiz" aria-labelledby="story-quiz-title">
+          <h2 id="story-quiz-title" data-i18n-key="story.quizTitle">Fragen zum Text</h2>
+          <p class="story-quiz__intro" data-i18n-key="story.quizIntro">
+            Beantworte die Fragen, um dein Verst&auml;ndnis zu &uuml;berpr&uuml;fen.
+          </p>
+
+          <ol class="story-quiz__list">
+            <% questions.forEach(function(question, index) { %>
+              <li class="story-question">
+                <form
+                  class="story-question-form"
+                  data-question-id="<%= question.id %>"
+                  data-correct-index="<%= question.correctIndex %>"
+                >
+                  <fieldset>
+                    <legend class="story-question__prompt">
+                      <span class="story-question__number">
+                        <span data-i18n-key="story.quizQuestionLabel">Frage</span>
+                        <span class="story-question__number-value"><%= index + 1 %></span>
+                      </span>
+                      <span class="story-question__text"><%= question.prompt %></span>
+                    </legend>
+
+                    <% if (question.audioPath) { %>
+                      <div class="story-question__audio">
+                        <span class="story-question__audio-label" data-i18n-key="story.quizAudioLabel">Audio</span>
+                        <audio controls preload="none" class="story-question__audio-player">
+                          <source src="/<%= question.audioPath %>" type="audio/mpeg" />
+                        </audio>
+                      </div>
+                    <% } %>
+
+                    <div class="story-question__answers">
+                      <% question.answers.forEach(function(answer, answerIndex) { %>
+                        <label class="story-question__answer">
+                          <input
+                            type="radio"
+                            name="answer-<%= question.id %>"
+                            value="<%= answerIndex %>"
+                          />
+                          <span><%= answer %></span>
+                        </label>
+                      <% }) %>
+                    </div>
+                  </fieldset>
+
+                  <div class="story-question__actions">
+                    <button type="submit" class="button button-secondary" data-i18n-key="story.quizCheckButton">
+                      Antwort pr&uuml;fen
+                    </button>
+                    <p
+                      class="story-question__status"
+                      role="status"
+                      aria-live="polite"
+                      data-message-missing="Bitte w&auml;hle eine Antwort aus."
+                      data-message-correct="Richtig! Gut gemacht."
+                      data-message-incorrect="Das ist nicht korrekt. Versuche es erneut."
+                      data-i18n-attr="data-message-missing:story.quizFeedbackMissing,data-message-correct:story.quizFeedbackCorrect,data-message-incorrect:story.quizFeedbackIncorrect"
+                    ></p>
+                  </div>
+                </form>
+              </li>
+            <% }) %>
+          </ol>
+        </section>
+      <% } %>
+
+      <aside class="story-note">
+        <h2 data-i18n-key="story.noteTitle">Lesetipp</h2>
+        <p data-i18n-key="story.noteBody">
+          Lies den Text laut, markiere neue Vokabeln und schreibe zwei eigene S&auml;tze mit den neuen W&ouml;rtern.
+        </p>
+      </aside>
+
+      <nav class="story-navigation">
+        <% if (prevStory) { %>
+          <a href="/story/<%= prevStory.id %>" class="nav-button nav-prev">
+            <span aria-hidden="true">&#8592;</span>
+            <span>
+              <small data-i18n-key="story.prevLabel">Vorherige Geschichte</small>
+              <strong><%= prevStory.title %></strong>
+            </span>
+          </a>
+        <% } %>
+
+        <% if (nextStory) { %>
+          <a href="/story/<%= nextStory.id %>" class="nav-button nav-next">
+            <span>
+              <small data-i18n-key="story.nextLabel">N&auml;chste Geschichte</small>
+              <strong><%= nextStory.title %></strong>
+            </span>
+            <span aria-hidden="true">&#8594;</span>
+          </a>
+        <% } %>
+      </nav>
+    </div>
+  </article>
+</main>
+
+<script src="/js/story.js" defer></script>
+<%- include('partials/footer') %>

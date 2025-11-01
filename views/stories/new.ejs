@@ -1,0 +1,225 @@
+<%- include('../partials/head', { pageTitle: 'Neue Geschichte' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <span class="eyebrow">Redaktion</span>
+      <h1>Neue Geschichte erstellen</h1>
+      <p>Ver&ouml;ffentliche frische Inhalte f&uuml;r die Community. Alle Felder werden direkt in der Datenbank gespeichert.</p>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="container container-narrow">
+      <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <form method="post" action="/stories" class="form-card" enctype="multipart/form-data" data-question-builder>
+        <div class="form-field">
+          <label for="title" class="form-label">Titel</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="form-input"
+            value="<%= values.title %>"
+            required
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="level" class="form-label">Niveau</label>
+          <select id="level" name="level" class="form-select" required>
+            <% ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'].forEach(function(levelOption) { %>
+              <option value="<%= levelOption %>" <%= values.level === levelOption ? 'selected' : '' %>><%= levelOption %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="summary" class="form-label">Zusammenfassung</label>
+          <input
+            type="text"
+            id="summary"
+            name="summary"
+            class="form-input"
+            value="<%= values.summary %>"
+            maxlength="240"
+            required
+          />
+          <p class="help-text">Fasse die Geschichte in einem Satz zusammen (max. 240 Zeichen).</p>
+        </div>
+
+        <div class="form-field">
+          <label for="body" class="form-label">Volltext</label>
+          <textarea
+            id="body"
+            name="body"
+            class="form-textarea"
+            rows="14"
+            required
+          ><%= values.body %></textarea>
+          <p class="help-text">Nutze Absatzumbr&uuml;che f&uuml;r neue Abschnitte. Formatierung erfolgt automatisch.</p>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <section class="question-builder" aria-labelledby="question-builder-title">
+          <div class="question-builder__header">
+            <div>
+              <span class="eyebrow">Quiz</span>
+              <h2 id="question-builder-title">Verst&auml;ndnisfragen</h2>
+              <p class="help-text">
+                F&uuml;ge Fragen hinzu, die direkt mit der Geschichte verbunden sind. Jede Frage ben&ouml;tigt vier Antworten und genau eine richtige L&ouml;sung.
+              </p>
+              <p class="help-text">
+                Hinweis: Falls das Formular einen Fehler meldet, m&uuml;ssen Audiodateien erneut ausgew&auml;hlt werden.
+              </p>
+            </div>
+
+            <button type="button" class="button button-secondary" data-add-question>
+              Weitere Frage hinzuf&uuml;gen
+            </button>
+          </div>
+
+          <div class="question-builder__list" data-question-list>
+            <% const questions = values.questions && values.questions.length > 0 ? values.questions : [{
+              prompt: '',
+              answers: ['', '', '', ''],
+              correctIndex: 0,
+            }] %>
+
+            <% questions.forEach(function(question, questionIndex) { %>
+              <article class="question-card" data-question-index="<%= questionIndex %>">
+                <header class="question-card__header">
+                  <h3>Frage <span data-question-number><%= questionIndex + 1 %></span></h3>
+                  <button type="button" class="button button-ghost button-small" data-remove-question>
+                    Entfernen
+                  </button>
+                </header>
+
+                <div class="form-field">
+                  <label class="form-label" for="question-<%= questionIndex %>-prompt">Fragetext</label>
+                  <textarea
+                    id="question-<%= questionIndex %>-prompt"
+                    name="questions[<%= questionIndex %>][prompt]"
+                    class="form-textarea"
+                    rows="3"
+                    required
+                  ><%= question.prompt %></textarea>
+                </div>
+
+                <fieldset class="answer-grid">
+                  <legend class="form-label">Antwortoptionen</legend>
+                  <% question.answers.forEach(function(answer, answerIndex) { %>
+                    <% const answerId = `question-${questionIndex}-answer-${answerIndex}` %>
+                    <label class="answer-option" for="<%= answerId %>">
+                      <span class="answer-option__indicator">
+                        <input
+                          type="radio"
+                          name="questions[<%= questionIndex %>][correctIndex]"
+                          value="<%= answerIndex %>"
+                          <%= Number(question.correctIndex) === answerIndex ? 'checked' : '' %>
+                          required
+                        />
+                        <span>Richtige Antwort</span>
+                      </span>
+                      <input
+                        type="text"
+                        id="<%= answerId %>"
+                        name="questions[<%= questionIndex %>][answers][<%= answerIndex %>]"
+                        class="form-input"
+                        value="<%= answer %>"
+                        required
+                      />
+                    </label>
+                  <% }) %>
+                </fieldset>
+
+                <div class="form-field">
+                  <label class="form-label" for="question-<%= questionIndex %>-audio">Optionales Audio (MP3)</label>
+                  <input
+                    type="file"
+                    id="question-<%= questionIndex %>-audio"
+                    name="questions[<%= questionIndex %>][audio]"
+                    class="form-input"
+                    accept="audio/mpeg"
+                  />
+                </div>
+              </article>
+            <% }) %>
+          </div>
+
+          <template id="question-template">
+            <article class="question-card" data-question-index="__INDEX__">
+              <header class="question-card__header">
+                <h3>Frage <span data-question-number>__NUMBER__</span></h3>
+                <button type="button" class="button button-ghost button-small" data-remove-question>
+                  Entfernen
+                </button>
+              </header>
+
+              <div class="form-field">
+                <label class="form-label" for="question-__INDEX__-prompt">Fragetext</label>
+                <textarea
+                  id="question-__INDEX__-prompt"
+                  name="questions[__INDEX__][prompt]"
+                  class="form-textarea"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+
+              <fieldset class="answer-grid">
+                <legend class="form-label">Antwortoptionen</legend>
+                <% for (let i = 0; i < 4; i++) { %>
+                  <label class="answer-option" for="question-__INDEX__-answer-<%= i %>">
+                    <span class="answer-option__indicator">
+                      <input
+                        type="radio"
+                        name="questions[__INDEX__][correctIndex]"
+                        value="<%= i %>"
+                        <%= i === 0 ? 'checked' : '' %>
+                        required
+                      />
+                      <span>Richtige Antwort</span>
+                    </span>
+                    <input
+                      type="text"
+                      id="question-__INDEX__-answer-<%= i %>"
+                      name="questions[__INDEX__][answers][<%= i %>]"
+                      class="form-input"
+                      required
+                    />
+                  </label>
+                <% } %>
+              </fieldset>
+
+              <div class="form-field">
+                <label class="form-label" for="question-__INDEX__-audio">Optionales Audio (MP3)</label>
+                <input
+                  type="file"
+                  id="question-__INDEX__-audio"
+                  name="questions[__INDEX__][audio]"
+                  class="form-input"
+                  accept="audio/mpeg"
+                />
+              </div>
+            </article>
+          </template>
+        </section>
+
+        <div class="form-actions">
+          <a href="/" class="button button-ghost">Abbrechen</a>
+          <button type="submit" class="button button-primary">Ver&ouml;ffentlichen</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<script src="/js/story-form.js"></script>
+
+<%- include('../partials/footer') %>

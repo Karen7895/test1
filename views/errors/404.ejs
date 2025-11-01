@@ -1,0 +1,18 @@
+<%- include('../partials/head', { pageTitle: 'Seite nicht gefunden' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="error-state">
+    <div class="container container-narrow">
+      <span class="error-code">404</span>
+      <h1>Die angeforderte Seite wurde nicht gefunden.</h1>
+      <p>Vielleicht wurde die Geschichte gel&ouml;scht oder die URL ist nicht korrekt. Schau dir unsere Bibliothek an.</p>
+      <div class="error-actions">
+        <a href="/" class="button button-primary">Zur Bibliothek</a>
+        <a href="/about" class="button button-ghost">Projektinfo</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

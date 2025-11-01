@@ -1,0 +1,55 @@
+<%- include('../partials/head', { pageTitle: 'Vokabeln' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <span class="eyebrow" data-i18n-key="learning.heroEyebrow">Lernen</span>
+      <h1 data-i18n-key="learning.vocabulary.title">Vokabelwerkstatt</h1>
+      <p data-i18n-key="learning.vocabulary.intro">
+        Entdecke neue W&ouml;rter mit Beispiels&auml;tzen, die du sofort in deinen Geschichten wiederfinden kannst.
+      </p>
+      <% if (isAdmin) { %>
+        <a href="/learning/vocabulary/new" class="button button-secondary" data-i18n-key="learning.vocabulary.addCta">
+          Neuer Eintrag
+        </a>
+      <% } %>
+    </div>
+  </section>
+
+  <section class="learning-section">
+    <div class="container container-narrow">
+      <% if (entries.length === 0) { %>
+        <div class="empty-state">
+          <h2 data-i18n-key="learning.vocabulary.emptyTitle">Noch keine Eintr&auml;ge</h2>
+          <p data-i18n-key="learning.vocabulary.emptyCopy">
+            Sobald neue Vokabeln ver&ouml;ffentlicht werden, erscheinen sie hier mit &Uuml;bersetzung und Beispielsatz.
+          </p>
+        </div>
+      <% } else { %>
+        <ul class="learning-list" aria-label="Vokabeln">
+          <% entries.forEach(function(entry) { %>
+            <li class="learning-card">
+              <div class="learning-card__header">
+                <h2 class="learning-card__title"><%= entry.term %></h2>
+                <span class="learning-card__meta">
+                  <span data-i18n-key="learning.vocabulary.publishedOnLabel">Ver&ouml;ffentlicht am</span>
+                  <time datetime="<%= entry.created_at %>"><%= entry.created_at %></time>
+                </span>
+              </div>
+              <p class="learning-card__translation"><%= entry.translation %></p>
+              <% if (entry.example_sentence) { %>
+                <p class="learning-card__example" data-i18n-key="learning.vocabulary.exampleLabel">
+                  Beispielsatz:
+                </p>
+                <blockquote class="learning-card__quote"><%= entry.example_sentence %></blockquote>
+              <% } %>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

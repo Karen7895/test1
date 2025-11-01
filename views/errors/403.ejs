@@ -1,0 +1,18 @@
+<%- include('../partials/head', { pageTitle: 'Zugriff verweigert' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="error-state">
+    <div class="container container-narrow">
+      <span class="error-code">403</span>
+      <h1>Du hast keinen Zugriff auf diesen Bereich.</h1>
+      <p>Nur der Admin-Account kann auf diese Funktion zugreifen. Bitte wende dich an das Team, wenn du Zugriff ben&ouml;tigst.</p>
+      <div class="error-actions">
+        <a href="/" class="button button-primary">Zur&uuml;ck zur Bibliothek</a>
+        <a href="/about" class="button button-ghost">Mehr &uuml;ber uns</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

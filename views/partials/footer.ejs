@@ -1,0 +1,98 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand-mark">DL</span>
+        <div>
+          <strong>LearnDeutsch</strong>
+          <p data-i18n-key="footer.tagline">Gemeinsam Sprachen meistern.</p>
+        </div>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="/" data-i18n-key="footer.home">Startseite</a>
+        <a href="/" data-i18n-key="footer.stories">Geschichten</a>
+        <a href="/learning/grammar" data-i18n-key="footer.grammar">Grammatik</a>
+        <a href="/learning/vocabulary" data-i18n-key="footer.vocabulary">Wortschatz</a>
+        <a href="#" data-i18n-key="footer.faq">FAQ</a>
+        <a href="mailto:support@learndeutsch.com" data-i18n-key="footer.contact">Kontakt</a>
+        <a href="#" data-i18n-key="footer.privacy">Datenschutzerkl&auml;rung</a>
+        <a href="#" data-i18n-key="footer.terms">Nutzungsbedingungen</a>
+        <a href="#" data-i18n-key="footer.cookies">Cookie-Richtlinie</a>
+      </nav>
+    </div>
+
+    <div class="footer-messages">
+      <p data-i18n-key="footer.support">Brauchst du Hilfe? Schreib uns an support@learndeutsch.com</p>
+      <p data-i18n-key="footer.signature">Mit ❤️ gemacht f&uuml;r alle, die Deutsch lernen.</p>
+      <p data-i18n-key="footer.author">Autorin: Karen Bannahyan</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating AI Helper Button -->
+<button class="ai-chat-button" id="ai-chat-button" aria-label="AI-Hilfe &ouml;ffnen">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+  </svg>
+</button>
+
+<!-- AI Chat Drawer -->
+<div class="ai-chat-drawer" id="ai-chat-drawer">
+  <div class="chat-header">
+    <h3>AI-Hilfe</h3>
+    <button class="settings-button" id="settings-button" aria-label="Einstellungen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M12 1v6m0 6v6m-9-9h6m6 0h6m-3.5-6.5l-4.5 4.5m0 6l4.5 4.5m-12-4.5l4.5-4.5m0 6l-4.5 4.5"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="chat-messages" id="chat-messages">
+    <div class="message user-message">
+      <div class="message-content">Was bedeutet "lernen"?</div>
+    </div>
+    <div class="message bot-message">
+      <div class="message-content">"lernen" bedeutet "to learn" auf Englisch. Zum Beispiel: "Ich lerne Deutsch."</div>
+    </div>
+    <div class="message user-message">
+      <div class="message-content">Wie konjugiert man "sein"?</div>
+    </div>
+    <div class="message bot-message">
+      <div class="message-content">Das Verb "sein" wird so konjugiert: ich bin, du bist, er/sie/es ist, wir sind, ihr seid, sie sind.</div>
+    </div>
+  </div>
+
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" placeholder="Stelle eine Frage..." class="chat-input">
+    <button id="send-button" class="send-button" aria-label="Senden">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Einstellungen</h3>
+      <button class="close-button" id="close-settings" aria-label="Schliessen">&times;</button>
+    </div>
+    <div class="modal-body">
+      <label for="api-key-input" class="form-label">OpenAI API-Schl&uuml;ssel</label>
+      <input type="password" id="api-key-input" class="form-input" placeholder="sk-...">
+      <p class="help-text">Wenn der Chat nicht funktioniert, trage hier deinen API-Schl&uuml;ssel ein.</p>
+    </div>
+    <div class="modal-footer">
+      <button id="save-settings" class="button button-primary">Speichern</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/header.js"></script>
+<script src="/js/ai-chat.js"></script>
+</body>
+</html>

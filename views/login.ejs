@@ -1,0 +1,48 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main class="main-content">
+  <section class="auth-section">
+    <div class="container auth-container">
+      <h2 class="section-title" data-i18n-key="auth.loginTitle">Log in</h2>
+
+      <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <form method="post" action="/login" class="auth-form">
+        <div class="form-group">
+          <label for="email" class="form-label" data-i18n-key="auth.emailLabel">Email address</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-input"
+            value="<%= values.email %>"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label" data-i18n-key="auth.passwordLabel">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-input"
+            required
+          />
+        </div>
+
+        <button type="submit" class="button button-primary" data-i18n-key="auth.loginButton">Log in</button>
+      </form>
+
+      <p class="auth-switch">
+        <span data-i18n-key="auth.loginSwitchPrompt">Need an account?</span>
+        <a href="/signup" class="nav-link" data-i18n-key="auth.loginSwitchAction">Create one</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>

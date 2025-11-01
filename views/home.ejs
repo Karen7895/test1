@@ -1,0 +1,224 @@
+<%- include('partials/head') %>
+<%- include('partials/header') %>
+
+<main class="main-content">
+  <section class="hero hero--gradient">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow" data-i18n-key="home.heroEyebrow">Deutsch lernen mit Freude</span>
+          <h2 class="hero-title" data-i18n-key="home.heroTitle">
+            Entdecke handverlesene Kurzgeschichten f&uuml;r jedes Niveau.
+          </h2>
+          <p class="hero-subtitle" data-i18n-key="home.heroSubtitle">
+            Lies authentische Szenarien, trainiere deinen Wortschatz und sp&uuml;re deinen Fortschritt. Neue Inhalte erscheinen regelm&auml;&szlig;ig &ndash; perfekt f&uuml;r deine t&auml;gliche Lernroutine.
+          </p>
+          <div class="hero-actions">
+            <a href="#stories" class="button button-primary" data-i18n-key="home.heroPrimary">Jetzt lesen</a>
+            <a href="/about" class="button button-ghost" data-i18n-key="home.heroSecondary">&Uuml;ber das Projekt</a>
+          </div>
+          <dl class="hero-stats">
+            <div>
+              <dt data-i18n-key="home.heroStatsReaders">Aktive Leser:innen</dt>
+              <dd>1500+</dd>
+            </div>
+            <div>
+              <dt data-i18n-key="home.heroStatsStories">Verf&uuml;gbare Geschichten</dt>
+              <dd><%= stories.length %></dd>
+            </div>
+            <div>
+              <dt data-i18n-key="home.heroStatsLevels">Niveaustufen</dt>
+              <dd>A1 – C2</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <span class="level-badge level-b1">B1</span>
+            <span class="hero-card-tag" data-i18n-key="home.heroCardTag">Feature</span>
+          </div>
+          <h3 data-i18n-key="home.heroCardTitle">&bdquo;Der Morgen in M&uuml;nchen&ldquo;</h3>
+          <p data-i18n-key="home.heroCardDescription">
+            Eine Pendlerin navigiert ihren Weg durch den Trubel der Stadt.
+            Mit Vokabeln f&uuml;r allt&auml;gliche Gespr&auml;che &ndash; ideal zum Nachsprechen.
+          </p>
+          <ul class="hero-card-list">
+            <li data-i18n-key="home.heroCardBullet1">&#128257; Inklusive Verst&auml;ndnisfragen</li>
+            <li data-i18n-key="home.heroCardBullet2">&#128483; Aussprache-Tipps zum Mitsprechen</li>
+            <li data-i18n-key="home.heroCardBullet3">&#128338; Lesedauer: 6 Minuten</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="plans-section" id="plans">
+    <div class="container">
+      <div class="plans-header">
+        <span class="eyebrow" data-i18n-key="home.plansEyebrow">Abonnements</span>
+        <h2 class="section-title" data-i18n-key="home.plansTitle">Finde den passenden Lernplan</h2>
+        <p class="section-subtitle" data-i18n-key="home.plansSubtitle">
+          Vom kostenlosen Einstieg bis zur intensiven Begleitung &ndash; w&auml;hle die Lernumgebung, die dich ans Ziel bringt.
+        </p>
+      </div>
+
+      <div class="plans-grid">
+        <article class="plan-card">
+          <header class="plan-card-header">
+            <h3 class="plan-card-title" data-i18n-key="home.plan.basicName">🟢 Basic Plan</h3>
+            <p class="plan-card-price" data-i18n-key="home.plan.basicPrice">0&nbsp;&euro;/Monat</p>
+          </header>
+          <p class="plan-card-audience" data-i18n-key="home.plan.basicAudience">
+            F&uuml;r Einsteiger:innen, die die Grundlagen erkunden m&ouml;chten.
+          </p>
+          <ul class="plan-card-features">
+            <li data-i18n-key="home.plan.basicFeature1">Zugang zu 5 kostenlosen Geschichten.</li>
+            <li data-i18n-key="home.plan.basicFeature2">Sofortige Wort&uuml;bersetzung per Klick.</li>
+            <li data-i18n-key="home.plan.basicFeature3">1 Karteikartenset (Grundwortschatz).</li>
+            <li data-i18n-key="home.plan.basicFeature4">Grundlegende Grammatiklektionen (ausgew&auml;hlte Themen).</li>
+          </ul>
+          <p class="plan-card-goal" data-i18n-key="home.plan.basicGoal">
+            Ziel: Lerne die Kernfunktionen kennen, bevor du abonnierst.
+          </p>
+        </article>
+
+        <article class="plan-card plan-card--featured">
+          <span class="plan-card-badge" data-i18n-key="home.plan.mediumBadge">Beliebt</span>
+          <header class="plan-card-header">
+            <h3 class="plan-card-title" data-i18n-key="home.plan.mediumName">🟠 Medium Plan</h3>
+            <p class="plan-card-price" data-i18n-key="home.plan.mediumPrice">7,99&nbsp;&ndash;&nbsp;10&nbsp;&euro;/Monat</p>
+          </header>
+          <p class="plan-card-audience" data-i18n-key="home.plan.mediumAudience">
+            F&uuml;r Lernende, die strukturierte &Uuml;bungen und Fortschrittstracking m&ouml;chten.
+          </p>
+          <ul class="plan-card-features">
+            <li data-i18n-key="home.plan.mediumFeature1">Zugang zu allen Geschichten inklusive w&ouml;chentlicher Neuheiten.</li>
+            <li data-i18n-key="home.plan.mediumFeature2">&Uuml;bersetzungen speichern und gelernte W&ouml;rter markieren.</li>
+            <li data-i18n-key="home.plan.mediumFeature3">Alle Karteikarten-Sets nach Thema oder Schwierigkeit.</li>
+            <li data-i18n-key="home.plan.mediumFeature4">&Uuml;bungen und Quiz zur Verst&auml;ndniskontrolle.</li>
+            <li data-i18n-key="home.plan.mediumFeature5">Kompletter Grammatikbereich mit interaktiven Beispielen.</li>
+            <li data-i18n-key="home.plan.mediumFeature6">Native-Speaker-Audio (MP3) f&uuml;r jede Geschichte.</li>
+          </ul>
+          <p class="plan-card-goal" data-i18n-key="home.plan.mediumGoal">
+            Ziel: Unser Hauptabo &ndash; alle Inhalte und Funktionen f&uuml;r nachhaltiges Lernen.
+          </p>
+        </article>
+
+        <article class="plan-card">
+          <header class="plan-card-header">
+            <h3 class="plan-card-title" data-i18n-key="home.plan.advancedName">🔵 Advanced Plan</h3>
+            <p class="plan-card-price" data-i18n-key="home.plan.advancedPrice">14,99&nbsp;&ndash;&nbsp;19,99&nbsp;&euro;/Monat</p>
+          </header>
+          <p class="plan-card-audience" data-i18n-key="home.plan.advancedAudience">
+            F&uuml;r ernsthafte Lernende, die sich auf B2&ndash;C1 oder h&ouml;here Kompetenz vorbereiten.
+          </p>
+          <ul class="plan-card-features">
+            <li data-i18n-key="home.plan.advancedFeature1">Alle Inhalte des Medium-Plans.</li>
+            <li data-i18n-key="home.plan.advancedFeature2">KI-Lehrer: Fehleranalyse und Empfehlungen.</li>
+            <li data-i18n-key="home.plan.advancedFeature3">Zugang zu Stories auf B2&ndash;C2 Niveau.</li>
+            <li data-i18n-key="home.plan.advancedFeature4">Erweiterte &Uuml;bungen und Quiz f&uuml;r Tiefenverst&auml;ndnis.</li>
+            <li data-i18n-key="home.plan.advancedFeature5">Stories als MP3 oder PDF downloaden f&uuml;r Offline-Training.</li>
+            <li data-i18n-key="home.plan.advancedFeature6">Sehr fortgeschrittene Deutschressourcen.</li>
+            <li data-i18n-key="home.plan.advancedFeature7">Optionale monatliche Live-Q&amp;A oder 1:1 Lehrersessions.</li>
+          </ul>
+          <p class="plan-card-goal" data-i18n-key="home.plan.advancedGoal">
+            Ziel: Intensive Vorbereitung auf hohes Sprachniveau mit individueller Begleitung.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="stories-section" id="stories">
+    <div class="container">
+      <% if (isAdmin) { %>
+        <div class="admin-banner">
+          <div>
+            <span class="admin-eyebrow" data-i18n-key="home.adminEyebrow">Redaktion</span>
+            <h3 data-i18n-key="home.adminTitle">Teile deine n&auml;chste Geschichte</h3>
+            <p data-i18n-key="home.adminCopy">Als Admin kannst du neue Geschichten und &Uuml;bungsfragen direkt ver&ouml;ffentlichen &ndash; inklusive Level, Zusammenfassung, Antworten und Audio.</p>
+          </div>
+          <div class="admin-banner-actions">
+            <a class="button button-primary" href="/stories/new" data-i18n-key="home.adminCta">
+              Geschichte schreiben
+            </a>
+            <a class="button button-secondary" href="/questions/new" data-i18n-key="home.adminQuestionCta">
+              Frage erstellen
+            </a>
+          </div>
+        </div>
+      <% } %>
+      <% if (!currentUser) { %>
+        <div class="login-tip" id="login-tip" hidden>
+          <p data-i18n-key="home.loginPrompt">
+            Melde dich an, um Geschichten zu lesen und deinen Fortschritt zu verfolgen.
+          </p>
+          <div class="login-tip-actions">
+            <a href="/login" class="button button-primary" data-i18n-key="home.loginAction">Zum Login</a>
+            <button type="button" class="button button-ghost" id="login-tip-close" data-i18n-key="home.loginDismiss">
+              Vielleicht sp&auml;ter
+            </button>
+          </div>
+        </div>
+      <% } %>
+
+      <div class="story-toolbar">
+        <div>
+          <h2 class="section-title" data-i18n-key="home.libraryTitle">Bibliothek</h2>
+          <p class="section-subtitle" data-i18n-key="home.librarySubtitle">Durchsuche unsere Sammlung nach deinem aktuellen Sprachniveau.</p>
+        </div>
+        <div class="filter-group" role="group" aria-label="Schwierigkeitsstufe filtern" data-i18n-attr="aria-label:home.filterLabel">
+          <button class="filter-chip is-active" data-level-filter="all" data-i18n-key="home.filterAll">Alle</button>
+          <button class="filter-chip" data-level-filter="A1">A1</button>
+          <button class="filter-chip" data-level-filter="A2">A2</button>
+          <button class="filter-chip" data-level-filter="B1">B1</button>
+          <button class="filter-chip" data-level-filter="B2">B2</button>
+          <button class="filter-chip" data-level-filter="C1">C1</button>
+          <button class="filter-chip" data-level-filter="C2">C2</button>
+        </div>
+      </div>
+
+      <% if (!stories.length) { %>
+        <div class="empty-state">
+          <div class="empty-icon">📚</div>
+          <h3 data-i18n-key="home.emptyTitle">Noch keine Geschichten</h3>
+          <p data-i18n-key="home.emptyCopy">Sobald die erste Geschichte ver&ouml;ffentlicht ist, erscheint sie hier.</p>
+        </div>
+      <% } else { %>
+        <div class="story-grid" id="story-grid">
+          <% stories.forEach((story) => { %>
+            <article class="story-card" data-level="<%= story.level %>">
+              <header class="story-card-header">
+                <span class="level-badge level-<%= story.level.toLowerCase() %>"><%= story.level %></span>
+                <% if (story.created_at) { %>
+                  <time datetime="<%= story.created_at %>"><%= story.created_at %></time>
+                <% } %>
+              </header>
+              <h3 class="story-card-title"><%= story.title %></h3>
+              <p class="story-card-summary"><%= story.summary %></p>
+              <div class="story-card-footer">
+                <span class="story-card-readtime" data-i18n-key="home.readTime">Lesedauer: ~5 Min</span>
+                <% if (currentUser) { %>
+                  <a href="/story/<%= story.id %>" class="button button-secondary" data-i18n-key="home.readButton">Lesen</a>
+                <% } else { %>
+                  <a
+                    href="/story/<%= story.id %>"
+                    class="button button-secondary"
+                    data-story-link
+                    data-auth-required="true"
+                    data-i18n-key="home.readButton"
+                  >
+                    Lesen
+                  </a>
+                <% } %>
+              </div>
+            </article>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer') %>
+<script src="/js/home.js" defer></script>

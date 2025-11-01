@@ -1,0 +1,104 @@
+<%- include('../partials/head', { pageTitle: 'Neue Frage' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <span class="eyebrow">Redaktion</span>
+      <h1>Neue &Uuml;bungsfrage erstellen</h1>
+      <p>Definiere eine Multiple-Choice-Frage mit vier Antwortoptionen und optionaler Audioaufnahme.</p>
+    </div>
+  </section>
+
+  <section class="form-section">
+    <div class="container container-narrow">
+      <% if (success) { %>
+        <div class="alert alert-success"><%= success %></div>
+      <% } %>
+
+      <% if (error) { %>
+        <div class="alert alert-error"><%= error %></div>
+      <% } %>
+
+      <form method="post" action="/questions" class="form-card" enctype="multipart/form-data">
+        <div class="form-field">
+          <label for="storyId" class="form-label">Geschichte</label>
+          <% if (stories.length === 0) { %>
+            <p class="help-text">
+              Lege zuerst eine Geschichte an, bevor du eine Frage hinzuf&uuml;gst.
+            </p>
+          <% } else { %>
+            <select id="storyId" name="storyId" class="form-input" required>
+              <% stories.forEach(function(story) { %>
+                <option value="<%= story.id %>" <%= String(story.id) === String(values.storyId) ? 'selected' : '' %>>
+                  <%= story.title %>
+                </option>
+              <% }) %>
+            </select>
+            <p class="help-text">W&auml;hle die Geschichte, zu der diese Frage geh&ouml;rt.</p>
+          <% } %>
+        </div>
+
+        <div class="form-field">
+          <label for="prompt" class="form-label">Fragetext</label>
+          <textarea
+            id="prompt"
+            name="prompt"
+            class="form-textarea"
+            rows="5"
+            required
+          ><%= values.prompt %></textarea>
+        </div>
+
+        <fieldset class="form-field">
+          <legend class="form-label">Antwortoptionen</legend>
+
+          <% ['A', 'B', 'C', 'D'].forEach(function(label, index) { %>
+            <div class="answer-option">
+              <div class="answer-option-inputs">
+                <input
+                  type="radio"
+                  id="correct-<%= index %>"
+                  name="correctIndex"
+                  value="<%= index %>"
+                  <%= Number(values.correctIndex) === index ? 'checked' : '' %>
+                  required
+                />
+                <label for="answer-<%= index %>" class="form-label">Antwort <%= label %></label>
+              </div>
+              <input
+                type="text"
+                id="answer-<%= index %>"
+                name="answers[]"
+                class="form-input"
+                value="<%= values.answers[index] %>"
+                required
+              />
+            </div>
+          <% }) %>
+
+          <p class="help-text">Markiere &uuml;ber die Auswahl, welche Antwort korrekt ist.</p>
+        </fieldset>
+
+        <div class="form-field">
+          <label for="audio" class="form-label">Audio (optional)</label>
+          <input
+            type="file"
+            id="audio"
+            name="audio"
+            class="form-input"
+            accept="audio/mpeg"
+          />
+          <p class="help-text">Unterst&uuml;tztes Format: MP3 (max. 10&nbsp;MB).</p>
+        </div>
+
+        <div class="form-actions">
+          <a href="/" class="button button-ghost">Abbrechen</a>
+          <button type="submit" class="button button-primary" <%= stories.length === 0 ? 'disabled' : '' %>>Frage speichern</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

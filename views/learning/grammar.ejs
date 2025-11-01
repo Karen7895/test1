@@ -1,0 +1,49 @@
+<%- include('../partials/head', { pageTitle: 'Grammatik' }) %>
+<%- include('../partials/header') %>
+
+<main class="main-content">
+  <section class="page-hero">
+    <div class="container container-narrow">
+      <span class="eyebrow" data-i18n-key="learning.heroEyebrow">Lernen</span>
+      <h1 data-i18n-key="learning.grammar.title">Grammatikstudio</h1>
+      <p data-i18n-key="learning.grammar.intro">
+        Kompakte Erkl&auml;rungen helfen dir, wiederkehrende Fehler zu vermeiden und Strukturen sicher anzuwenden.
+      </p>
+      <% if (isAdmin) { %>
+        <a href="/learning/grammar/new" class="button button-secondary" data-i18n-key="learning.grammar.addCta">
+          Neues Thema
+        </a>
+      <% } %>
+    </div>
+  </section>
+
+  <section class="learning-section">
+    <div class="container container-narrow">
+      <% if (topics.length === 0) { %>
+        <div class="empty-state">
+          <h2 data-i18n-key="learning.grammar.emptyTitle">Noch keine Themen</h2>
+          <p data-i18n-key="learning.grammar.emptyCopy">
+            Sobald neue Grammatiklektionen ver&ouml;ffentlicht werden, findest du sie hier mit Beispielen und Tipps.
+          </p>
+        </div>
+      <% } else { %>
+        <ul class="learning-list" aria-label="Grammatik">
+          <% topics.forEach(function(topic) { %>
+            <li class="learning-card">
+              <div class="learning-card__header">
+                <h2 class="learning-card__title"><%= topic.title %></h2>
+                <span class="learning-card__meta">
+                  <span data-i18n-key="learning.grammar.publishedOnLabel">Ver&ouml;ffentlicht am</span>
+                  <time datetime="<%= topic.created_at %>"><%= topic.created_at %></time>
+                </span>
+              </div>
+              <div class="learning-card__body"><%- topic.explanation %></div>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>
